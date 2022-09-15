@@ -12,7 +12,7 @@ function capitalFirstLetter(word) {
         + word.slice(1, word.length).toLowerCase();
 }
 
-// Plays a single game of Rock Paper Scissors
+// Plays a single game of Rock Paper Scissors, returns name of winner
 function playRound(playerSelection, computerSelection) {
     let winMessage = 'You win!';
     let lossMessage = 'You lose!';
@@ -23,19 +23,16 @@ function playRound(playerSelection, computerSelection) {
     
     switch (playerSelection) {
         case 'Rock':
-            computerSelection === 'Paper' ? console.log(lossMessage) :
-                computerSelection === 'Scissors' ? console.log(winMessage) :
-                console.log(tieMessage);
-                break;
+             return (computerSelection === 'Paper') ? 'computer' :
+                (computerSelection === 'Scissors') ? 'player' :
+                'tie';
         case 'Paper':
-            computerSelection === 'Scissors' ? console.log(lossMessage) :
-                computerSelection === 'Rock' ? console.log(winMessage) :
-                console.log(tieMessage);
-                break;
+            return (computerSelection === 'Scissors') ? 'computer' :
+                (computerSelection === 'Rock') ? 'player' :
+                'tie';
         case 'Scissors':
-            computerSelection === 'Rock' ? console.log(lossMessage) :
-                computerSelection === 'Paper' ? console.log(winMessage) :
-                console.log(tieMessage);
-                break;
+            (computerSelection === 'Rock') ? 'computer' :
+                (computerSelection === 'Paper') ? 'player' :
+                'tie';
     }
 }
