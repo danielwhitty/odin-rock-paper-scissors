@@ -13,14 +13,18 @@ function capitalFirstLetter(word) {
 }
 
 // Plays a single game of Rock Paper Scissors, returns name of winner
-function playRound(playerSelection, computerSelection) {
+function playRound() {
     let winMessage = 'You win!';
     let lossMessage = 'You lose!';
     let tieMessage = 'You tie!';
-
+    
     // Get input from player
     let playerSelection = capitalFirstLetter(prompt("Rock, paper, or scissors?"));
-    
+
+    // Get computer choice
+    let computerSelection = getComputerChoice();
+
+    // Check for winner
     switch (playerSelection) {
         case 'Rock':
              return (computerSelection === 'Paper') ? 'computer' :
@@ -31,7 +35,7 @@ function playRound(playerSelection, computerSelection) {
                 (computerSelection === 'Rock') ? 'player' :
                 'tie';
         case 'Scissors':
-            (computerSelection === 'Rock') ? 'computer' :
+            return (computerSelection === 'Rock') ? 'computer' :
                 (computerSelection === 'Paper') ? 'player' :
                 'tie';
     }
