@@ -40,3 +40,29 @@ function playRound() {
                 'tie';
     }
 }
+
+// Plays a game with numGames rounds
+function game(numGames) {
+    let playerWins = 0;
+    let computerWins = 0;
+
+    for (let i = 0; i < numGames; i++) {
+        let roundWinner = playRound();
+        if (roundWinner === 'tie') {
+            console.log(`Round ${i + 1}\nIt's a tie!`);
+            continue;
+        }
+        console.log(`Round ${i + 1}\nThe winner is: ${roundWinner}!`);
+        (roundWinner === 'player') ? playerWins++ : computerWins++;
+    }
+
+    let gameWinner = (playerWins > computerWins) ? 'player' :
+        (computerWins > playerWins) ? 'computer' : 'tie';
+
+    console.log(`WIN TOTALS\nPlayer: ${playerWins}\nComputer: ${computerWins}`);
+    if (gameWinner = 'tie') {
+        console.log('It\'s a tie!');
+    } else {
+        console.log(`${capitalFirstLetter(gameWinner)} wins!`);
+    }
+}
