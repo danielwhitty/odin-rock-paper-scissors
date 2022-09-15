@@ -12,14 +12,14 @@ function capitalFirstLetter(word) {
         + word.slice(1, word.length).toLowerCase();
 }
 
-// Get input from player
-let playerSelection = capitalFirstLetter(prompt("Rock, paper, or scissors?"));
-
 // Plays a single game of Rock Paper Scissors
 function playRound(playerSelection, computerSelection) {
     let winMessage = 'You win!';
     let lossMessage = 'You lose!';
     let tieMessage = 'You tie!';
+
+    // Get input from player
+    let playerSelection = capitalFirstLetter(prompt("Rock, paper, or scissors?"));
     
     switch (playerSelection) {
         case 'Rock':
