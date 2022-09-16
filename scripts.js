@@ -14,12 +14,19 @@ function capitalFirstLetter(word) {
 
 // Plays a single game of Rock Paper Scissors, returns name of winner
 function playRound() {
-    let winMessage = 'You win!';
-    let lossMessage = 'You lose!';
-    let tieMessage = 'You tie!';
-    
-    // Get input from player
-    let playerSelection = capitalFirstLetter(prompt("Rock, paper, or scissors?"));
+    let playerInput = prompt("Rock, paper, or scissors?");
+    if (playerInput === null) {
+        // Return value if user cancel's input
+        return 1;
+    }
+
+    let playerSelection = capitalFirstLetter(playerInput);
+
+    while (playerSelection !== CHOICES[0] && playerSelection !== CHOICES[1] 
+        && playerSelection !== CHOICES[2]) {
+            alert("Invalid input, try again");
+            playerSelection = capitalFirstLetter(prompt("Rock, paper, or scissors?"));
+        }
 
     // Get computer choice
     let computerSelection = getComputerChoice();
@@ -48,7 +55,12 @@ function game(numGames) {
 
     for (let i = 0; i < numGames; i++) {
         let roundWinner = playRound();
-        if (roundWinner === 'tie') {
+
+        // Check for return value caused by cancelling prompt
+        if (roundWinner === 1) {
+            i--;
+            continue;
+        } else if (roundWinner === 'tie') {
             console.log(`Round ${i + 1}\nIt's a tie!`);
             continue;
         }
