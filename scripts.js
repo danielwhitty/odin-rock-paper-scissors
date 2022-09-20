@@ -1,5 +1,5 @@
 // Array of possible choices
-const CHOICES = ['Rock', 'Paper', 'Scissors'];
+const CHOICES = ['rock', 'paper', 'scissors'];
 
 // Gets random choice for computer player
 function getComputerChoice() {
@@ -13,68 +13,73 @@ function capitalFirstLetter(word) {
 }
 
 // Plays a single game of Rock Paper Scissors, returns name of winner
-function playRound() {
-    let playerInput = prompt("Rock, paper, or scissors?");
-    if (playerInput === null) {
-        // Return value if user cancel's input
-        return 1;
-    }
-
-    let playerSelection = capitalFirstLetter(playerInput);
-
-    while (playerSelection !== CHOICES[0] && playerSelection !== CHOICES[1] 
-        && playerSelection !== CHOICES[2]) {
-            alert("Invalid input, try again");
-            playerSelection = capitalFirstLetter(prompt("Rock, paper, or scissors?"));
-        }
+function playRound(playerInput) {
+    let playerSelection = playerInput.toLowerCase();
 
     // Get computer choice
     let computerSelection = getComputerChoice();
 
     // Check for winner
     switch (playerSelection) {
-        case 'Rock':
-             return (computerSelection === 'Paper') ? 'computer' :
-                (computerSelection === 'Scissors') ? 'player' :
-                'tie';
-        case 'Paper':
-            return (computerSelection === 'Scissors') ? 'computer' :
-                (computerSelection === 'Rock') ? 'player' :
-                'tie';
-        case 'Scissors':
-            return (computerSelection === 'Rock') ? 'computer' :
-                (computerSelection === 'Paper') ? 'player' :
-                'tie';
+        case 'rock':
+             if (computerSelection === 'paper') {
+                updateScore('computer');
+                break;
+             } else if (computerSelection === 'scissors') {
+                updateScore('player');
+                break;
+             } else {
+                break;
+             }
+        case 'paper':
+            if (computerSelection === 'scissors') {
+                updateScore('computer');
+                break;
+             } else if (computerSelection === 'rock') {
+                updateScore('player');
+                break;
+             } else {
+                break;
+             }
+        case 'scissors':
+            if (computerSelection === 'rock') {
+                updateScore('computer');
+                break;
+             } else if (computerSelection === 'paper') {
+                updateScore('player');
+                break;
+             } else {
+                break;
+             }
     }
 }
 
-// Plays a game with numGames rounds
-function game(numGames) {
-    let playerWins = 0;
-    let computerWins = 0;
-
-    for (let i = 0; i < numGames; i++) {
-        let roundWinner = playRound();
-
-        // Check for return value caused by cancelling prompt
-        if (roundWinner === 1) {
-            i--;
-            continue;
-        } else if (roundWinner === 'tie') {
-            console.log(`Round ${i + 1}\nIt's a tie!`);
-            continue;
-        }
-        console.log(`Round ${i + 1}\nThe winner is: ${roundWinner}!`);
-        (roundWinner === 'player') ? playerWins++ : computerWins++;
-    }
-
-    let gameWinner = (playerWins > computerWins) ? 'player' :
-        (computerWins > playerWins) ? 'computer' : 'tie';
-
-    console.log(`WIN TOTALS\nPlayer: ${playerWins}\nComputer: ${computerWins}`);
-    if (gameWinner = 'tie') {
-        console.log('It\'s a tie!');
-    } else {
-        console.log(`${capitalFirstLetter(gameWinner)} wins!`);
+function updateScore(winner) {
+    if (winner === 'computer') {
+        computerPara.textContent = `Computer: ${++computerWins}`;
+    } else if (winner === 'player') {
+        playerPara.textContent = `Player: ${++playerWins}`;
     }
 }
+
+// Add score elements to page
+const resultsDiv = document.querySelector('.results');
+
+let playerWins = 0;
+let computerWins = 0;
+
+const playerPara = document.createElement('p');
+playerPara.textContent = 'Player: 0';
+
+const computerPara = document.createElement('p');
+computerPara.textContent = 'Computer: 0';
+
+resultsDiv.appendChild(playerPara);
+resultsDiv.appendChild(computerPara);
+
+// Add playRound functionality to buttons
+let buttons = document.querySelectorAll('.options > button');
+buttons.forEach(button => {
+    button.addEventListener('click', function () {
+        playRound(`${button.textContent}`)}
+)});
