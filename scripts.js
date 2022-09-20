@@ -60,6 +60,12 @@ function updateScore(winner) {
     } else if (winner === 'player') {
         playerPara.textContent = `Player: ${++playerWins}`;
     }
+    
+    // Check for 5 wins
+    if (computerWins === 5 || playerWins == 5) {
+        const optionsDiv = document.querySelector('.options');
+        optionsDiv.style.display = 'none';
+    }
 }
 
 // Add score elements to page
