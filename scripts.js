@@ -6,7 +6,7 @@ function getComputerChoice() {
     return CHOICES[Math.floor(Math.random() * 3)];
 }
 
-// Function to ensure user input matches capitalisation of CHOICES array
+// Function to capitlise first letter of a word
 function capitalFirstLetter(word) {
     return word.slice(0, 1).toUpperCase() 
         + word.slice(1, word.length).toLowerCase();
@@ -19,6 +19,14 @@ function playRound(playerInput) {
     // Get computer choice
     let computerSelection = getComputerChoice();
 
+    // Add paragraph elemnts to page regarding current choices
+    const playerChoicePara = document.querySelector('#player-choice');
+    const computerChoicePara = document.querySelector('#computer-choice');
+
+    // Add selections to above para elements
+    playerChoicePara.textContent = `Player chose ${playerSelection}`;
+    computerChoicePara.textContent = `Computer chose ${computerSelection}`;
+
     // Check for winner
     switch (playerSelection) {
         case 'rock':
@@ -29,6 +37,7 @@ function playRound(playerInput) {
                 updateScore('player');
                 break;
              } else {
+                updateScore('tie');
                 break;
              }
         case 'paper':
@@ -39,6 +48,7 @@ function playRound(playerInput) {
                 updateScore('player');
                 break;
              } else {
+                updateScore('tie');
                 break;
              }
         case 'scissors':
@@ -49,23 +59,37 @@ function playRound(playerInput) {
                 updateScore('player');
                 break;
              } else {
+                updateScore('tie');
                 break;
              }
     }
 }
 
 function updateScore(winner) {
-    if (winner === 'computer') {
-        computerPara.textContent = `Computer: ${++computerWins}`;
-    } else if (winner === 'player') {
-        playerPara.textContent = `Player: ${++playerWins}`;
-    }
+    const winnerPara = document.querySelector('#round-winner');
     
+    if (winner === 'computer') {
+        computerScorePara.textContent = `Computer: ${++computerWins}`;
+    } else if (winner === 'player') {
+        playerScorePara.textContent = `Player: ${++playerWins}`;
+    }
+
     // Check for 5 wins
     if (computerWins === 5 || playerWins == 5) {
         const optionsDiv = document.querySelector('.options');
         optionsDiv.style.display = 'none';
+        winnerPara.textContent = 
+            `GAME OVER!: ${capitalFirstLetter(winner)} wins the game!`;
+        return;
     }
+
+    // Add results of current round to page
+    if (winner === 'tie') {
+        winnerPara.textContent = 'It\'s a tie!';
+    } else {
+        winnerPara.textContent = `${capitalFirstLetter(winner)} wins the round!`;
+    }
+    
 }
 
 // Add score elements to page
@@ -74,14 +98,14 @@ const resultsDiv = document.querySelector('.results');
 let playerWins = 0;
 let computerWins = 0;
 
-const playerPara = document.createElement('p');
-playerPara.textContent = 'Player: 0';
+const playerScorePara = document.createElement('p');
+playerScorePara.textContent = 'Player: 0';
 
-const computerPara = document.createElement('p');
-computerPara.textContent = 'Computer: 0';
+const computerScorePara = document.createElement('p');
+computerScorePara.textContent = 'Computer: 0';
 
-resultsDiv.appendChild(playerPara);
-resultsDiv.appendChild(computerPara);
+resultsDiv.appendChild(playerScorePara);
+resultsDiv.appendChild(computerScorePara);
 
 // Add playRound functionality to buttons
 let buttons = document.querySelectorAll('.options > button');
