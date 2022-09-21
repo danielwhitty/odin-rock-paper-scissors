@@ -1,0 +1,59 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: #9da9e3;
+    min-height: 100%;
+    font-family: 'Roboto';
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+    flex: 1 1 0;
+    min-height: 100%;
+}
+
+.options button {
+    height: 100px;
+    width: 200px;
+    border-radius: 1.5em;
+    font-size: 32px;
+    background-color: aliceblue;
+    border: 2px solid black;
+}
+
+button:hover {
+    background-color: #adbfce;
+}
+
+.current-round {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 0;
+    font-size: 32px;
+    background: aliceblue;
+    margin: 0px;
+}
+
+#round-winner {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.results {
+    display: flex;
+    margin-top: auto;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0;
+    gap: 20%;
+    font-size: 50px;
+}

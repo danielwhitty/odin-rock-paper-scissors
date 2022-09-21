@@ -79,7 +79,7 @@ function updateScore(winner) {
         const optionsDiv = document.querySelector('.options');
         optionsDiv.style.display = 'none';
         winnerPara.textContent = 
-            `GAME OVER!: ${capitalFirstLetter(winner)} wins the game!`;
+            `GAME OVER! ${capitalFirstLetter(winner)} wins the game!`;
         return;
     }
 
