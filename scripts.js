@@ -75,7 +75,7 @@ function updateScore(winner) {
     }
 
     // Check for 5 wins
-    if (computerWins === 5 || playerWins == 5) {
+    if (computerWins === 5 || playerWins === 5) {
         const optionsDiv = document.querySelector('.options');
         optionsDiv.style.display = 'none';
         winnerPara.textContent = 
